@@ -1,15 +1,15 @@
-name: Build Paper Server
+name: Build Velocity Server
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Minecraft version to build'
-        default: '1.19.4'
+        description: 'Velocity version to build'
+        default: '3.2.0-SNAPSHOT'
         type: string
       build:
-        description: 'Paper build number'
-        default: '527'
+        description: 'Velocity build number'
+        default: '252'
         type: string
 
 jobs:
@@ -32,9 +32,9 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: .
-        file: ./Dockerfile-paper
+        file: ./Dockerfile-velocity
         push: true
-        tags: rudxde/minecraft-paper:${{ inputs.version }}-${{ inputs.build }}
+        tags: rudxde/minecraft-velocity:${{ inputs.version }}-${{ inputs.build }}
         platforms: linux/arm64
         build-args: |
           VERSION=${{ inputs.version }}

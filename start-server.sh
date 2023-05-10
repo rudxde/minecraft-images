@@ -21,4 +21,4 @@ java \
 -XX:G1MaxNewSizePercent=80 \
 -XX:G1MixedGCLiveThresholdPercent=50 \
 -XX:+AlwaysPreTouch \
--jar /jar/paper.jar nogui
+-jar /jar/server.jar nogui

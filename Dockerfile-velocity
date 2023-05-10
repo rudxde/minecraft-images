@@ -5,7 +5,9 @@ ARG BUILD
 RUN mkdir /jar
 COPY ./start-server.sh /start-server.sh
 RUN chmod +x /start-server.sh
-ADD https://api.papermc.io/v2/projects/paper/versions/${VERSION}/builds/${BUILD}/downloads/paper-${VERSION}-${BUILD}.jar /jar/server.jar
+ADD https://api.papermc.io/v2/projects/velocity/versions/${VERSION}/builds/${BUILD}/downloads/velocity-${VERSION}-${BUILD}.jar /jar/server.jar
+
+
 ENV EULA=TRUE
 WORKDIR /minecraft
 ENTRYPOINT ["/start-server.sh"]
