@@ -1,0 +1,11 @@
+ARG OPENJDK_TAG=21
+FROM openjdk:${OPENJDK_TAG}
+ARG MINECRAFT_VERSION
+ARG PAPER_BUILD
+RUN mkdir /jar
+COPY ./start-server.sh /start-server.sh
+RUN chmod +x /start-server.sh
+ADD https://api.papermc.io/v2/projects/paper/versions/${MINECRAFT_VERSION}/builds/${PAPER_BUILD}/downloads/paper-${MINECRAFT_VERSION}-${PAPER_BUILD}.jar /jar/paper.jar
+ENV EULA=TRUE
+WORKDIR /minecraft
+ENTRYPOINT ["/start-server.sh"]

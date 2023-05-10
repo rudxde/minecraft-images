@@ -1,0 +1,41 @@
+name: Build Paper Server
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Minecraft version to build'
+        default: '1.19.4'
+        type: string
+      paper-version:
+        description: 'Paper build number'
+        default: '527'
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v2
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build image and push to Docker Hub
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        file: ./Dockerfile-paper
+        push: true
+        tags: rudxde/minecraft-paper:${{ inputs.version }}-${{ inputs.paper-version }}
+        platforms: linux/arm64
+        build-args: |
+          MINECRAFT_VERSION=${{ inputs.version }}
+          PAPER_BUILD=${{ inputs.paper-version }}
