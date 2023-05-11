@@ -2,6 +2,8 @@
 JAVA_XMX=${JAVA_XMX:-1G}
 JAVA_XMS=${JAVA_XMS:-256M}
 
+echo "eula=true" > /minecraft/eula.txt
+
 java \
 -Xms$JAVA_XMS \
 -Xmx$JAVA_XMX \
