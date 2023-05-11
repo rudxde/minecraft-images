@@ -35,7 +35,7 @@ jobs:
         file: ./Dockerfile-paper
         push: true
         tags: rudxde/minecraft-paper:${{ inputs.version }}-${{ inputs.build }}
-        platforms: linux/arm64
+        platforms: linux/amd64,linux/arm64
         build-args: |
           VERSION=${{ inputs.version }}
           BUILD=${{ inputs.build }}
