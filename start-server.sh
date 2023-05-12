@@ -7,12 +7,13 @@ if [[ -z "${EULA}" ]]; then
 fi
 
 plugins=${PLUGINS:-}
+mkdir -p /minecraft/plugins
 # Loop through each file in the list
 for file in $plugins; do
   # Check if the file exists
-  if [[ -e $file ]]; then
+  if [[ -e "/jar/$file.jar" ]]; then
     # Copy the file to the destination folder
-    cp "$file.jar" /minecraft/plugins/
+    cp "/jar/$file.jar" /minecraft/plugins/
   else
     echo "Plugin $file does not exist."
   fi
