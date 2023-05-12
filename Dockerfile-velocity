@@ -4,6 +4,7 @@ FROM --platform=$BUILDPLATFORM alpine as download-jars
 ARG LUCKPERMS_VERSION=5.4.79
 ARG LUCKPERMS_BUILD=1491
 ADD https://download.luckperms.net/${LUCKPERMS_BUILD}/velocity/LuckPerms-Velocity-${LUCKPERMS_VERSION}.jar /jar/luckperms.jar
+RUN echo ${LUCKPERMS_VERSION} > /jar/luckperms-version.txt
 
 ## Paper Jar
 ARG VERSION
