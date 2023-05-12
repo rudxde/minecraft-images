@@ -18,7 +18,7 @@ for file in $plugins; do
   fi
 done
 
-java \
+exec java \
 -Xms$JAVA_XMS \
 -Xmx$JAVA_XMX \
 -XX:+UseG1GC \
