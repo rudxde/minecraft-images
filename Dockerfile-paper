@@ -1,11 +1,36 @@
 ARG OPENJDK_TAG=21
-FROM openjdk:${OPENJDK_TAG}
+FROM alpine as download-jars
+## Harbor Jar
+ARG HARBOR_VERSION=1.6.3
+ADD https://github.com/nkomarn/harbor/releases/download/${HARBOR_VERSION}/Harbor-${HARBOR_VERSION}.jar /jar/harbor-${HARBOR_VERSION}.jar
+
+## LuckPerms Jar
+ARG LUCKPERMS_VERSION=5.4.79
+ARG LUCKPERMS_BUILD=1491
+ADD https://download.luckperms.net/${LUCKPERMS_BUILD}/bukkit/loader/LuckPerms-Bukkit-${LUCKPERMS_VERSION}.jar /jar/luckperms-${LUCKPERMS_VERSION}.jar
+
+## MvInporter
+ARG MVIMPORTER_VERSION=0.0.1
+ADD https://github.com/drusin/mvinv-importer/releases/download/${MVIMPORTER_VERSION}/MvInvImporter-${MVIMPORTER_VERSION}.jar /jar/mvinv-importer-${MVIMPORTER_VERSION}.jar
+
+## Simple Portals
+ARG SIMPLE_PORTALS_VERSION=1.7.2
+ADD https://github.com/XZot1K/SimplePortals/releases/download/${SIMPLE_PORTALS_VERSION}/SimplePortals-${SIMPLE_PORTALS_VERSION}.jar /jar/simple-portals-${SIMPLE_PORTALS_VERSION}.jar
+
+
+## Spawn
+ARG SPAWN_VERSION=2.0
+ADD https://github.com/rockquiet/Spawn/releases/download/v${SPAWN_VERSION}/Spawn-${SPAWN_VERSION}.jar /jar/spawn-${SPAWN_VERSION}.jar
+
+## Paper Jar
 ARG VERSION
 ARG BUILD
+ADD https://api.papermc.io/v2/projects/paper/versions/${VERSION}/builds/${BUILD}/downloads/paper-${VERSION}-${BUILD}.jar /jar/server.jar
+
+FROM openjdk:${OPENJDK_TAG}
 RUN mkdir /jar
 COPY ./start-server.sh /start-server.sh
 RUN chmod +x /start-server.sh
-ADD https://api.papermc.io/v2/projects/paper/versions/${VERSION}/builds/${BUILD}/downloads/paper-${VERSION}-${BUILD}.jar /jar/server.jar
-ENV EULA=TRUE
+COPY --from=download-jars /jar /jar
 WORKDIR /minecraft
 ENTRYPOINT ["/start-server.sh"]

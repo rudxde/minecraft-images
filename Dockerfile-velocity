@@ -1,13 +1,21 @@
 ARG OPENJDK_TAG=21
-FROM openjdk:${OPENJDK_TAG}
+FROM alpine as download-jars
+## LuckPerms Jar
+ARG LUCKPERMS_VERSION=5.4.79
+ARG LUCKPERMS_BUILD=1491
+ADD https://download.luckperms.net/${LUCKPERMS_BUILD}/velocity/LuckPerms-Velocity-${LUCKPERMS_VERSION}.jar /jar/luckperms.jar
+
+## Paper Jar
 ARG VERSION
 ARG BUILD
-RUN mkdir /jar
-COPY ./start-server.sh /start-server.sh
-RUN chmod +x /start-server.sh
 ADD https://api.papermc.io/v2/projects/velocity/versions/${VERSION}/builds/${BUILD}/downloads/velocity-${VERSION}-${BUILD}.jar /jar/server.jar
 
 
+FROM openjdk:${OPENJDK_TAG}
+RUN mkdir /jar
+COPY ./start-server.sh /start-server.sh
+RUN chmod +x /start-server.sh
+COPY --from=download-jars /jar /jar
 ENV EULA=TRUE
 WORKDIR /minecraft
 ENTRYPOINT ["/start-server.sh"]

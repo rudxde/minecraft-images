@@ -2,7 +2,21 @@
 JAVA_XMX=${JAVA_XMX:-1G}
 JAVA_XMS=${JAVA_XMS:-256M}
 
-echo "eula=true" > /minecraft/eula.txt
+if [[ -z "${EULA}" ]]; then
+    echo "eula=true" > /minecraft/eula.txt
+fi
+
+plugins=${PLUGINS:-}
+# Loop through each file in the list
+for file in $plugins; do
+  # Check if the file exists
+  if [[ -e $file ]]; then
+    # Copy the file to the destination folder
+    cp "$file.jar" /minecraft/plugins/
+  else
+    echo "Plugin $file does not exist."
+  fi
+done
 
 java \
 -Xms$JAVA_XMS \
