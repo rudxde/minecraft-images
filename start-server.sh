@@ -2,7 +2,7 @@
 JAVA_XMX=${JAVA_XMX:-1G}
 JAVA_XMS=${JAVA_XMS:-256M}
 
-if [[ -z "${EULA}" ]]; then
+if [[ ! -z "${EULA}" ]]; then
     echo "eula=true" > /minecraft/eula.txt
 fi
 
