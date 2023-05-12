@@ -1,5 +1,5 @@
 ARG OPENJDK_TAG=21
-FROM alpine as download-jars
+FROM --platform=$BUILDPLATFORM alpine as download-jars
 ## Harbor Jar
 ARG HARBOR_VERSION=1.6.3
 ADD https://github.com/nkomarn/harbor/releases/download/${HARBOR_VERSION}/Harbor-${HARBOR_VERSION}.jar /jar/harbor-${HARBOR_VERSION}.jar

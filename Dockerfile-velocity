@@ -1,5 +1,5 @@
 ARG OPENJDK_TAG=21
-FROM alpine as download-jars
+FROM --platform=$BUILDPLATFORM alpine as download-jars
 ## LuckPerms Jar
 ARG LUCKPERMS_VERSION=5.4.79
 ARG LUCKPERMS_BUILD=1491
