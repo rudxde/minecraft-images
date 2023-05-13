@@ -6,6 +6,11 @@ ARG LUCKPERMS_BUILD=1491
 ADD https://download.luckperms.net/${LUCKPERMS_BUILD}/velocity/LuckPerms-Velocity-${LUCKPERMS_VERSION}.jar /jar/luckperms.jar
 RUN echo ${LUCKPERMS_VERSION} > /jar/luckperms-version.txt
 
+
+## VLobby
+ARG VLOBBY_VERSION=2.0.1
+ADD https://github.com/4drian3d/VLobby/releases/download/${VLOBBY_VERSION}/VLobby-${VLOBBY_VERSION}.jar /jar/vlobby.jar
+
 ## Paper Jar
 ARG VERSION
 ARG BUILD
