@@ -1,8 +1,8 @@
 ARG OPENJDK_TAG=21
 FROM --platform=$BUILDPLATFORM alpine as download-jars
 ## LuckPerms Jar
-ARG LUCKPERMS_VERSION=5.4.79
-ARG LUCKPERMS_BUILD=1491
+ARG LUCKPERMS_VERSION=5.4.98
+ARG LUCKPERMS_BUILD=1512
 ADD https://download.luckperms.net/${LUCKPERMS_BUILD}/velocity/LuckPerms-Velocity-${LUCKPERMS_VERSION}.jar /jar/luckperms.jar
 RUN echo ${LUCKPERMS_VERSION} > /jar/luckperms-version.txt
 
@@ -17,7 +17,7 @@ ARG MCKOTLIN_VERSION=1.3.0-k1.8.21
 ADD https://github.com/4drian3d/MCKotlin/releases/download/${MCKOTLIN_VERSION}/MCKotlinVelocity-${MCKOTLIN_VERSION}.jar /jar/mckotlin.jar
 
 
-## Paper Jar
+## Velocity Jar
 ARG VERSION
 ARG BUILD
 ADD https://api.papermc.io/v2/projects/velocity/versions/${VERSION}/builds/${BUILD}/downloads/velocity-${VERSION}-${BUILD}.jar /jar/server.jar
