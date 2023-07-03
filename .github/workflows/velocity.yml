@@ -9,7 +9,7 @@ on:
         type: string
       build:
         description: 'Velocity build number'
-        default: '252'
+        default: '260'
         type: string
 
 jobs:
