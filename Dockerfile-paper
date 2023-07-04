@@ -6,8 +6,8 @@ ADD https://github.com/nkomarn/harbor/releases/download/${HARBOR_VERSION}/Harbor
 RUN echo ${HARBOR_VERSION} > /jar/harbor-version.txt
 
 ## LuckPerms Jar
-ARG LUCKPERMS_VERSION=5.4.79
-ARG LUCKPERMS_BUILD=1491
+ARG LUCKPERMS_VERSION=5.4.98
+ARG LUCKPERMS_BUILD=1512
 ADD https://download.luckperms.net/${LUCKPERMS_BUILD}/bukkit/loader/LuckPerms-Bukkit-${LUCKPERMS_VERSION}.jar /jar/luckperms.jar
 RUN echo ${LUCKPERMS_VERSION} > /jar/luckperms-version.txt
 
