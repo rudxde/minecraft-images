@@ -1,4 +1,4 @@
-ARG OPENJDK_TAG=22
+ARG OPENJDK_TAG=20
 FROM --platform=$BUILDPLATFORM alpine as download-jars
 ## Harbor Jar
 ARG HARBOR_VERSION=1.6.3
