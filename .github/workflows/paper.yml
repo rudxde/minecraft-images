@@ -9,7 +9,7 @@ on:
         type: string
       build:
         description: 'Paper build number'
-        default: '62'
+        default: '100'
         type: string
 
 jobs:
